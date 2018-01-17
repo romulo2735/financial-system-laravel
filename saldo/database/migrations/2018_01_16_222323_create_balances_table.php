@@ -1,5 +1,10 @@
 <?php
 
+/*
+    onDelete('casdade'): é utilizado aqui para não deixa 'orfãos' na tabela.
+    Se por acaso deletar um usuario , automaticamente ele vai deletar o registro.
+*/
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -14,8 +19,10 @@ class CreateBalancesTable extends Migration
     public function up()
     {
         Schema::create('balances', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->increments      ('id');
+            $table->integer         ('user_id')->unsigned();
+            $table->foreign         ('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->double          ('amount', 10, 2);
         });
     }
 
