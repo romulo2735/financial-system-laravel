@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'purple',
+    'skin' => 'blue',
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'layout' => 'top-nav',
+    'layout' => 'fixed',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,12 +108,27 @@ return [
     */
 
     'menu' => [
-        'Menu',
         [
             'text'        => 'Pagina Inicial',
             'url'         => 'admin/pages',
             'icon'        => 'home',
         ],
+        [
+            'text'      =>  'Financeiro',
+            'icon'      =>  'money',
+            'submenu'   =>[
+                [
+                    'text'  =>  'Saldo',
+                    'url'   =>  'admin/balance',
+                    'icon'  =>  'credit-card-alt'
+                ],
+                [
+                    'text'  =>  'Histórico',
+                    'url'   =>  'admin//history',
+                    'icon'  =>  'history'
+                ]
+            ]
+        ]
     ],
 
     /*
