@@ -3,8 +3,7 @@
 @section('title', 'Nova recarga')
 
 @section('content_header')
-    <h1>Fazer recarga</h1>
-
+    
     <ol class="breadcrumb">
         <li><a href="">Pagina Inicial</a></li>
         <li><a href="">Saldo</a></li>
@@ -20,7 +19,7 @@
         <form method="POST" action="{{ route('deposit.store') }}">
             {{ csrf_field() }}
             <div class="form-group">
-                <input value="" type="text" placeholder="Valor da Recarga" class="form-control">
+                <input name="value" type="text" placeholder="Valor da Recarga" class="form-control">
             </div>
             <div class="form-group">   
                 <button class="btn btn-success" type="submit">Recarregar</button>
