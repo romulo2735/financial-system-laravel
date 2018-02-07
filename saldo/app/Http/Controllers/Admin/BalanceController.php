@@ -32,4 +32,20 @@ class BalanceController extends Controller
 
             return redirect()->back()->with('error', $response['message']);
     }
+
+    public function saque(){
+        return view('admin.balance.saque');
+    }
+
+    public function saqueStore(MoneyValidationFormRequest $request){
+        dd($request->all());
+
+        $balance = auth()->user()->balance()->firstOrCreate([]);
+        $response = $balance->deposit($request->value);
+
+        if ($response['success'])
+            return redirect()->route('admin.balance')->with('success', $response['message']);
+
+        return redirect()->back()->with('error', $response['message']);
+    }
 }
