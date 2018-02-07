@@ -17,7 +17,7 @@
     </div>
     <div class="box-body">
         @include('admin.includes.alerts')
-        <form method="POST" action="{{ route('withdrawn.store') }}">
+        <form method="POST" action="{{ route('saque.store') }}">
             {{ csrf_field() }}
             <div class="form-group">
                 <input name="value" type="text" placeholder="Digite o valor do saque" class="form-control">
