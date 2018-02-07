@@ -30,16 +30,16 @@ class Balance extends Model{
 
         if ($deposit && $historic){
             DB::commit();
-            return[
-                'sucess'    =>  true,
-                'messege'   =>  'Sucesso ao recerregar'
+            return [
+                'success'    =>  true,
+                'message'   =>  'Sucesso ao recerregar'
             ];
         }
         else{
             DB::rollback();
             return[
-                'sucess'    =>  false,
-                'messege'   =>  'Falha ao recerregar'
+                'success'    =>  false,
+                'message'   =>  'Falha ao recerregar'
             ];
         }
 
