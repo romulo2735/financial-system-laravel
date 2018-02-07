@@ -6,6 +6,8 @@ $this->group(['middleware' => 'auth' , 'namespace' => 'Admin', 'prefix' => 'admi
     $this->get('balance' , 'BalanceController@index')->name('admin.balance');
     $this->get('deposit' , 'BalanceController@deposit')->name('balance.deposit');
     $this->post('deposit' , 'BalanceController@depositStore')->name('deposit.store');
+    $this->get('saque' , 'BalanceController@saque')->name('balance.saque');
+    $this->post('saque' , 'BalanceController@saqueStore')->name('saque.store');
 });
 
 
