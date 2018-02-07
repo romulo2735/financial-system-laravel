@@ -16,9 +16,11 @@
         <a href="{{ route('balance.deposit') }}" class="btn btn-primary">Recarregar
             <i class="fa fa-cart-plus" aria-hidden="true"></i>
         </a>
-        <a href="" class="btn btn-danger">Sacar
+        @if($amount > 0)
+        <a href="{{ route('balance.saque') }}" class="btn btn-danger">Sacar
             <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
         </a>
+        @endif
 
     </div>
 
