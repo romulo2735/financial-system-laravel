@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Nova recarga')
+@section('title', 'Depositar')
 
 @section('content_header')
     
