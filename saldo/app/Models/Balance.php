@@ -44,4 +44,46 @@ class Balance extends Model{
         }
 
     }
+
+    public function saque(float $value) : array {
+
+        //verificando se o usuario tem dinheiro disponivel para sacar.
+        if ($this->amount < $value){
+            return[
+                'success'   =>  false,
+                'message'   =>  'Saldo Insucifiente',
+            ];
+        }
+
+        DB::beginTransaction();
+
+        //Se for diferente de NULL ele recebe ele mmesmo
+        $totalBefore = $this->amount ? $this->amount : 0;
+
+        $this->amount -= number_format($value, 2, '.', '') ;
+        $saque = $this->save();
+
+        $historic = auth()->user()->histories()->create([
+            'type'          =>  'O', //entrada
+            'amount'        =>  $value,// valor que foi feita a recarga
+            'total_before'  =>  $totalBefore, // total do valor antes.
+            'total_after'   =>  $this->amount, //total valor dps da recarga
+            'date'          =>  date('Ymd'),
+        ]);
+
+        if ($saque && $historic){
+            DB::commit();
+            return [
+                'success'   =>  true,
+                'message'   =>  'Sucesso ao sacar'
+            ];
+        }
+        else{
+            DB::rollback();
+            return[
+                'success'   =>  false,
+                'message'   =>  'Falha ao sacar'
+            ];
+        }
+    }
 }
