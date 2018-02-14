@@ -15,7 +15,6 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->increments          ('id');
-            $table->integer             ('user_id')->unsigned();
             $table->integer             ('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum                ('type' , ['I', 'O' , 'T']);
             $table->double              ('amount', 10 , 2);
