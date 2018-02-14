@@ -38,10 +38,9 @@ class BalanceController extends Controller
     }
 
     public function saqueStore(MoneyValidationFormRequest $request){
-        dd($request->all());
 
         $balance = auth()->user()->balance()->firstOrCreate([]);
-        $response = $balance->deposit($request->value);
+        $response = $balance->saque($request->value);
 
         if ($response['success'])
             return redirect()->route('admin.balance')->with('success', $response['message']);
