@@ -13,13 +13,12 @@
 
 @section('content')
     <div class="box-header">
-        <a href="{{ route('balance.deposit') }}" class="btn btn-primary">Recarregar
-            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-        </a>
+        <a href="{{ route('balance.deposit') }}" class="btn btn-primary"><i class="fa fa-cart-plus" aria-hidden="true"></i> Recarregar </a>
         @if($amount > 0)
-        <a href="{{ route('balance.saque') }}" class="btn btn-danger">Sacar
-            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-        </a>
+        <a href="{{ route('balance.saque') }}" class="btn btn-danger"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Sacar </a>
+        @endif
+        @if($amount > 0)
+        <a href="{{ route('balance.transfer') }}" class="btn btn-info"><i class="fa fa-exchange"></i> Transferir </a>
         @endif
 
     </div>
