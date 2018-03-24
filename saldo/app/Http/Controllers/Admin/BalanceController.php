@@ -49,12 +49,11 @@ class BalanceController extends Controller
         return redirect()->back()->with('error', $response['message']);
     }
 
-    public function transfer(){
-
-        return view('admin.balance.transfer');
+    public function Transferencia(){
+        return view('admin.balance.transferencia');
     }
 
-    public function confirmTransfer(Request $request, User $user){
+    public function confirmarTransferencia(Request $request, User $user){
 
        if (!$sender = $user->getSender($request->sender)){
             return redirect()->back()->with('error', 'Usuário informado não foi encontrado');
@@ -66,21 +65,21 @@ class BalanceController extends Controller
        //recuperando o saldo do usuario para transferencia
        $balance = auth()->user()->balance;
        
-       return view('admin.balance.transfer-confirm', compact('sender' , 'balance'));
+       return view('admin.balance.transferencia-confirmar', compact('sender' , 'balance'));
     }
 
-    public function transferStore(MoneyValidationFormRequest $request){
+    public function transferenciaStore(MoneyValidationFormRequest $request){
 
         if(!$sender = $user->find($request->sender_id)){
-            return redirect()->route('balance.transfer')->with('success', 'Recebedor não encontrado');
+            return redirect()->route('balance.transferencia')->with('success', 'Recebedor não encontrado');
         }
         
         $balance = auth()->user()->balance()->firstOrCreate([]);
         $response = $balance->transfer($request->value, $sender);
 
         if ($response['success'])
-            return redirect()->route('balance.transfer')->with('success', $response['message']);
+            return redirect()->route('balance.transferencia')->with('success', $response['message']);
 
-        return redirect()->route('balance.transfer')->with('error', $response['message']);
+        return redirect()->route('balance.transferencia')->with('error', $response['message']);
     }
 }
