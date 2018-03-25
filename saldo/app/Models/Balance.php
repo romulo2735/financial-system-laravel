@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use App\User;
 
 class Balance extends Model{
     
@@ -85,5 +86,60 @@ class Balance extends Model{
                 'message'   =>  'Falha ao sacar'
             ];
         }
+    }
+
+    public function transferencia(float $value, User $sender): Array {
+        //verificando se o usuario tem dinheiro disponivel para transferir.
+        if ($this->amount < $value){
+            return[
+                'success'   =>  false,
+                'message'   =>  'Saldo Insucifiente',
+            ];
+        }
+
+        DB::beginTransaction();
+
+        //ATUALIZAR O PROPRIO SALDO DE QUEM TRANSFERE
+        $totalBefore = $this->amount ? $this->amount : 0;
+
+        $this->amount -= number_format($value, 2, '.', '') ;
+        $tranferencia = $this->save();
+
+        $historic = auth()->user()->histories()->create([
+            'type'                  =>  'T', //entrada
+            'amount'                =>  $value,// valor que foi feita a recarga
+            'total_before'          =>  $totalBefore, // total do valor antes.
+            'total_after'           =>  $this->amount, //total valor dps da recarga
+            'date'                  =>  date('Ymd'),
+            'user_id_transaction'   =>  $sender->id
+        ]);
+
+        //ATUALIZAR O PROPRIO SALDO DE QUEM RECEBE A TRANSFERENCIA
+        $senderBalance = $sender->balance()->firstOrCreate([]);
+        $totalBeforeSender = $senderBalance->amount ? $this->senderBalance: 0;
+        $this->amount += number_format($value, 2, '.', '') ;
+        $tranferenciaSender = $senderBalance->save();
+
+        $historicSender = auth()->user()->histories()->create([
+            'type'                  =>  'T', //entrada
+            'amount'                =>  $value,// valor que foi feita a recarga
+            'total_before'          =>  $totalBeforeSender, // total do valor antes.
+            'total_after'           =>  $this->amount, //total valor dps da recarga
+            'date'                  =>  date('Ymd'),
+            'user_id_transaction'   =>  auth()->user()->id,
+        ]);
+
+        if ($tranferencia && $historic && $tranferenciaSender && $historicSender){
+            DB::commit();
+            return [
+                'success'   =>  true,
+                'message'   =>  'Sucesso ao Transferir'
+            ];
+        }
+            DB::rollback();
+            return[
+                'success'   =>  false,
+                'message'   =>  'Falha ao transferir'
+            ];
     }
 }

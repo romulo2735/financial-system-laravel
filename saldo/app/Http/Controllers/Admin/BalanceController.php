@@ -68,18 +68,19 @@ class BalanceController extends Controller
        return view('admin.balance.transferencia-confirmar', compact('sender' , 'balance'));
     }
 
-    public function transferenciaStore(MoneyValidationFormRequest $request){
+    public function transferenciaStore(MoneyValidationFormRequest $request, User $user){
 
+        //recupera os dados que vai receber a transferencia.
         if(!$sender = $user->find($request->sender_id)){
             return redirect()->route('balance.transferencia')->with('success', 'Recebedor não encontrado');
         }
-        
+
         $balance = auth()->user()->balance()->firstOrCreate([]);
-        $response = $balance->transfer($request->value, $sender);
+        $response = $balance->transferencia($request->value, $sender);
 
-        if ($response['success'])
-            return redirect()->route('balance.transferencia')->with('success', $response['message']);
-
+        if ($response['success']){
+            return redirect()->route('admin.balance')->with('success', $response['message']);
+        }
         return redirect()->route('balance.transferencia')->with('error', $response['message']);
     }
 }
