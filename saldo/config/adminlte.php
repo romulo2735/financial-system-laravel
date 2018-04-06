@@ -124,7 +124,7 @@ return [
                 ],
                 [
                     'text'  =>  'Histórico',
-                    'url'   =>  'admin//history',
+                    'url'   =>  'admin/historicos',
                     'icon'  =>  'history'
                 ]
             ]
