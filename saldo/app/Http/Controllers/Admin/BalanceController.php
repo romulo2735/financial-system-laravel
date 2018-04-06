@@ -83,4 +83,10 @@ class BalanceController extends Controller
         }
         return redirect()->route('balance.transferencia')->with('error', $response['message']);
     }
+
+    public function Historicos(){
+        //recuperando os historicos do usuario logado.
+        $historicos = auth()->user()->histories()->get();
+        return view('admin.balance.historicos', compact('historicos'));
+    }
 }
