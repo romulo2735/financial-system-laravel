@@ -116,7 +116,7 @@ class Balance extends Model{
 
         //ATUALIZAR O PROPRIO SALDO DE QUEM RECEBE A TRANSFERENCIA
         $senderBalance = $sender->balance()->firstOrCreate([]);
-        $totalBeforeSender = $senderBalance->amount ? $this->senderBalance: 0;
+        $totalBeforeSender = $senderBalance->amount ? $senderBalance->amount: 0;
         $this->amount += number_format($value, 2, '.', '') ;
         $tranferenciaSender = $senderBalance->save();
 
