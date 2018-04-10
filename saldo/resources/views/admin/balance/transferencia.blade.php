@@ -19,7 +19,7 @@
     <div class="box-body">
         @include('admin.includes.alerts')
         <form method="POST" action="{{ route('transferencia.confirmar') }}">
-            {{ csrf_field() }}
+            {!! csrf_field() !!}
             <div class="form-group">
                 <input name="sender" type="text" placeholder="Informe os dados [NOME ou EMAIL]" class="form-control">
             </div>
