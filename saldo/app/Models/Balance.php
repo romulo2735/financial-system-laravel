@@ -99,7 +99,9 @@ class Balance extends Model{
 
         DB::beginTransaction();
 
-        //ATUALIZAR O PROPRIO SALDO DE QUEM TRANSFERE
+        /**************************************************
+            Atualizar o saldo de quem faz a transferencia
+         *************************************************/
         $totalBefore = $this->amount ? $this->amount : 0;
 
         $this->amount -= number_format($value, 2, '.', '') ;
@@ -114,17 +116,19 @@ class Balance extends Model{
             'user_id_transaction'   =>  $sender->id
         ]);
 
-        //ATUALIZAR O PROPRIO SALDO DE QUEM RECEBE A TRANSFERENCIA
+        /************************************************************
+            Atualizar o saldo do usuário que recebe a transferencia
+         ***********************************************************/
         $senderBalance = $sender->balance()->firstOrCreate([]);
-        $totalBeforeSender = $senderBalance->amount ? $senderBalance->amount: 0;
-        $this->amount += number_format($value, 2, '.', '') ;
+        $totalBeforeSender = $senderBalance->amount ? $senderBalance->amount : 0;
+        $senderBalance->amount += number_format($value, 2, '.', '') ;
         $tranferenciaSender = $senderBalance->save();
 
         $historicSender = auth()->user()->histories()->create([
-            'type'                  =>  'T', //entrada
+            'type'                  =>  'I', //entrada
             'amount'                =>  $value,// valor que foi feita a recarga
             'total_before'          =>  $totalBeforeSender, // total do valor antes.
-            'total_after'           =>  $this->amount, //total valor dps da recarga
+            'total_after'           =>  $senderBalance->amount, //total valor dps da recarga
             'date'                  =>  date('Ymd'),
             'user_id_transaction'   =>  auth()->user()->id,
         ]);
