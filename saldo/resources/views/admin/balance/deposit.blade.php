@@ -19,10 +19,10 @@
         @include('admin.includes.alerts')
         <form method="POST" action="{{ route('deposit.store') }}">
             {{ csrf_field() }}
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <input name="value" type="text" placeholder="Digite o valor da recarga" class="form-control">
             </div>
-            <div class="form-group">   
+            <div class="form-group col-md-6">   
                 <button class="btn btn-success" type="submit">Recarregar</button>
             </div>
         </form>    

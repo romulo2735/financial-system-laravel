@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Sistema de Saldo',
+    'title' => 'Sistema Financeiro',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Sistema</b> de Saldo',
+    'logo' => '<b>Sistema Financeiro</b>',
 
-    'logo_mini' => '<b>S</b>dS',
+    'logo_mini' => '<b>SF</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'blue',
+    'skin' => 'green',
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'layout' => 'fixed',
+    'layout' => 'top-nav',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'painel',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 
@@ -110,7 +110,7 @@ return [
     'menu' => [
         [
             'text'        => 'Pagina Inicial',
-            'url'         => 'admin/pages',
+            'url'         => 'admin/',
             'icon'        => 'home',
         ],
         [

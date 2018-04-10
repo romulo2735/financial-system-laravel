@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Saldo')
+@section('title', 'Sistema Financeiro')
 
 @section('content_header')
     <h1>Saldo</h1>
