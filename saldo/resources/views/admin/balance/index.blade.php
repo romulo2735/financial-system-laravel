@@ -32,7 +32,7 @@
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">Histórico <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('admin.balance.historicos')}}" class="small-box-footer">Histórico <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 @stop
