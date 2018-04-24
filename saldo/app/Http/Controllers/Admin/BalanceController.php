@@ -86,7 +86,7 @@ class BalanceController extends Controller
 
     public function Historicos(){
         //recuperando os historicos do usuario logado.
-        $historicos = auth()->user()->histories()->get();
+        $historicos = auth()->user()->histories()->with(['userSender'])->get();
         return view('admin.balance.historicos', compact('historicos'));
     }
 }
