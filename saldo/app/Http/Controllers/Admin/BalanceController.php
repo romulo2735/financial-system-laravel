@@ -10,6 +10,8 @@ use App\User;
 
 class BalanceController extends Controller
 {
+    private $paginacao = 4;
+
     public function index(){
 
         $balance = auth()->user()->balance;
@@ -86,7 +88,7 @@ class BalanceController extends Controller
 
     public function Historicos(){
         //recuperando os historicos do usuario logado.
-        $historicos = auth()->user()->histories()->with(['userSender'])->get();
+        $historicos = auth()->user()->histories()->with(['userSender'])->paginate($this->paginacao);
         return view('admin.balance.historicos', compact('historicos'));
     }
 }
