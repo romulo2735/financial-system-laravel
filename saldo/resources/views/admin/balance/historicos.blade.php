@@ -17,7 +17,7 @@
     </div>
 
     <div class="box-body">
-      <table class="table table-bordered table-hover">
+      <table class="table table-striped">
           <thead>
               <tr>
                   <th>#</th>
@@ -31,10 +31,15 @@
                 @forelse($historicos as $historico)  
                 <tr>
                     <td>{{ $historico->id }}</td>                  
-                    <td>{{ number_format($historico->amout,2, ',' , '.' ) }}</td>                  
-                    <td>{{ $historico->type }}</td>       
-                    <td>{{ $historico->data }}</td>           
-                    <td>{{ $historico->user_id_transaction }}</td>                  
+                    <td>{{ number_format($historico->amount,2, ',' , '.' ) }}</td>                  
+                    <td>{{ $historico->type($historico->type) }}</td>       
+                    <td>{{ $historico->date }}</td>           
+                    <td>@if($historico->user_id_transaction)
+                            {{ $historico->userSender->name}}
+                        @else
+                            -
+                        @endif
+                    </td>
                 </tr>
                 @empty
                 @endforelse
