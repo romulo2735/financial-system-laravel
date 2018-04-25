@@ -13,7 +13,20 @@
 
 @section('content')
     <div class="box-header">
+        <form action="{{ route('historico.pesquisa')  }}" method="post" class="form form-inline">
+            {!! csrf_field() !!}
+            <input type="text" name="id" class="form-control" placeholder="ID">
+            <input type="text" name="date" class="form-control">
+            <select name="type" class="form-control">
+                <option value="">-- Selecione --</option>
+                @foreach($types as $type)
+                    <option value="{{ $type  }}">{{ $type  }}</option>
+               @endforeach
+            </select>
 
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+            <button type="reset" class="btn btn-warning">Limpar</button>
+        </form>
     </div>
 
     <div class="box-body">
