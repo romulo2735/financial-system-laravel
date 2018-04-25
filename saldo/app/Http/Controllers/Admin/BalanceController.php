@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Balance;
 use App\Http\Requests\MoneyValidationFormRequest;
 use App\User;
+use App\Models\History;
 
 class BalanceController extends Controller
 {
@@ -86,9 +87,14 @@ class BalanceController extends Controller
         return redirect()->route('balance.transferencia')->with('error', $response['message']);
     }
 
-    public function Historicos(){
+    public function Historicos(History $historico){
         //recuperando os historicos do usuario logado.
         $historicos = auth()->user()->histories()->with(['userSender'])->paginate($this->paginacao);
-        return view('admin.balance.historicos', compact('historicos'));
+        $types = $historico->type();
+        return view('admin.balance.historicos', compact('historicos','types'));
+    }
+
+    public function PesquisaHistoricos(Request $request){
+        dd($request->all());
     }
 }
