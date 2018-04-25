@@ -16,6 +16,7 @@ $this->group(['middleware' => 'auth' , 'namespace' => 'Admin', 'prefix' => 'admi
     $this->post('transferencia' , 'BalanceController@TransferenciaStore')->name('transferencia.store');
 
     $this->get('historicos', 'BalanceController@Historicos')->name('admin.balance.historicos');
+    $this->post('historicos', 'BalanceController@PesquisaHistoricos')->name('historico.pesquisa');
 
 });
 
