@@ -22,7 +22,7 @@ class History extends Model
 
     public function type($type = null){
         $types = [
-            'I' => 'Recebido',
+            'I' => 'Entrada',
             'T' => 'Transferência',
             'O' => 'Saque'
         ];
