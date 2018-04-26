@@ -16,7 +16,7 @@
         <form action="{{ route('historico.pesquisa')  }}" method="post" class="form form-inline">
             {!! csrf_field() !!}
             <input type="text" name="id" class="form-control" placeholder="ID">
-            <input type="text" name="date" class="form-control">
+            <input type="date" name="date" class="form-control" placeholder="dd/mm/aaaa">
             <select name="type" class="form-control">
                 <option value="">-- Selecione --</option>
                 @foreach($types as $type)
