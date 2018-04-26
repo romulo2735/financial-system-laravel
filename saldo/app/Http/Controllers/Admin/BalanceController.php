@@ -11,7 +11,7 @@ use App\Models\History;
 
 class BalanceController extends Controller
 {
-    private $paginacao = 4;
+    private $paginacao = 10;
 
     public function index(){
 
@@ -84,6 +84,7 @@ class BalanceController extends Controller
         if ($response['success']){
             return redirect()->route('admin.balance')->with('success', $response['message']);
         }
+
         return redirect()->route('balance.transferencia')->with('error', $response['message']);
     }
 
@@ -91,10 +92,15 @@ class BalanceController extends Controller
         //recuperando os historicos do usuario logado.
         $historicos = auth()->user()->histories()->with(['userSender'])->paginate($this->paginacao);
         $types = $historico->type();
+
         return view('admin.balance.historicos', compact('historicos','types'));
     }
 
-    public function PesquisaHistoricos(Request $request){
-        dd($request->all());
+    public function PesquisaHistoricos(Request $request, History $historico){
+        $dados = $request->all();
+        $historicos = $historico->pesquisa($dados, $this->paginacao);
+        $types = $historico->type();
+
+        return view('admin.balance.historicos', compact('historicos','types'));
     }
 }
