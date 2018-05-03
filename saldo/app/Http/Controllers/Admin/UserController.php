@@ -9,7 +9,7 @@ class UserController extends Controller
 {
 
     public function Perfil(){
-        return view('site.perfil.perfil');
+            return view('site.perfil.perfil');
     }
 
     public function PerfilAtualizar(Request $request){
