@@ -20,7 +20,7 @@
         {!! csrf_field() !!}
         <div class="form-group">
             <label for="name">Nome: </label>
-            <input class="form-control" value="{{ auth()->user()->name  }}" type="text" name="name" placeholder="Nome">
+            <input class="form-control" value="{{auth()->user()->name}}" type="text" name="name" placeholder="Nome">
         </div>
         <div class="form-group">
             <label for="email">E-Mail: </label>
