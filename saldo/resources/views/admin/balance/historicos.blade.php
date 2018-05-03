@@ -19,8 +19,8 @@
             <input type="date" name="date" class="form-control" placeholder="dd/mm/aaaa">
             <select name="type" class="form-control">
                 <option value="">-- Selecione --</option>
-                @foreach($types as $type)
-                    <option value="{{ $type  }}">{{ $type  }}</option>
+                @foreach($types as $key => $type)
+                    <option value="{{ $key  }}">{{ $type  }}</option>
                @endforeach
             </select>
 
