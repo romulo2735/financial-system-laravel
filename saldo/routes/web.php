@@ -18,6 +18,9 @@ $this->group(['middleware' => 'auth' , 'namespace' => 'Admin', 'prefix' => 'admi
     $this->get('historicos', 'BalanceController@Historicos')->name('admin.balance.historicos');
     $this->any('historicos-pesquisa', 'BalanceController@PesquisaHistoricos')->name('historico.pesquisa');
 
+    $this->get('meu-perfil', 'UserController@Perfil')->name('perfil')->middleware('auth');
+    $this->get('atualizar-perfil', 'UserController@PerfilAtualizar')->name('perfil.atualizar')->middleware('auth');
+
 });
 
 
