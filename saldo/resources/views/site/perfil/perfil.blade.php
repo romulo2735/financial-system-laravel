@@ -3,7 +3,20 @@
 
 @section('content')
     <h1>Meu Perfil</h1>
-    <form action="{{route('perfil-atualizar')}}" method="post">
+
+     @if(session('success'))
+        <div class="alert alert-success">
+            {{session('success')}}
+        </div>
+     @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{session('error')}}
+        </div>
+     @endif
+
+    <form action="{{route('perfil.atualizar')}}" method="post">
         {!! csrf_field() !!}
         <div class="form-group">
             <label for="name">Nome: </label>
@@ -11,11 +24,11 @@
         </div>
         <div class="form-group">
             <label for="email">E-Mail: </label>
-            <input class="form-control" value="{{ auth()->user()->email  }}" type="text" name="email" placeholder="E-mail">
+            <input class="form-control" value="{{auth()->user()->email}}" type="text" name="email" placeholder="E-mail">
         </div>
         <div class="form-group">
             <label for="password">Senha: </label>
-            <input class="form-control" value="{{auth()->user()->password}}" type="password" name="password" placeholder="Senha">
+            <input class="form-control" type="password" name="password" placeholder="Senha">
         </div>
         <div class="form-group">
             <label for="image">Imagem: </label>
