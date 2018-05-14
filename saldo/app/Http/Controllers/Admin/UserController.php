@@ -14,6 +14,7 @@ class UserController extends Controller
 
     public function PerfilAtualizar(Request $request){
         $dados = $request->all();
+        $usuario = auth()->user();
 
         //verificando senha, caso o User tenha modifcado.
         if ($dados['password'] != null){
@@ -21,6 +22,33 @@ class UserController extends Controller
         }
         else{
             unset($dados['password']);
+        }
+
+        //upload da imagem do perfil, verificando se é um arquivo que pode ser incluso.
+        $dados['image'] = $usuario->image;
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            //se existe uma imagem
+            if ($usuario->image){
+                $name = $usuario->image;
+            }
+            //criando o nome da imagem, ID + NOME do user.
+            else{
+                $name = $usuario->id.kebab_case($usuario->name); //removendo caracteres especiais.
+            }
+
+            //extensao do arquivo
+            $extensaoImage = $request->image->extension();
+            $nameImage = "{$name}.{$extensaoImage}";
+
+            //atualizando o novo nome da image
+            $dados['image'] = $nameImage;
+
+            // armazenando o imagem.
+            $uploadImage = $request->image->storeAs('users', $nameImage);
+            if(!$uploadImage){
+                redirect()->back()->with('error', 'Falha ao carregar a imagem');
+            }
+
         }
 
         //atualizar apenas usuario logado.
