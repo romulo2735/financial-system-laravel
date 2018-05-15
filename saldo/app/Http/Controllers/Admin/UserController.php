@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateProfileFormRequest;
 
 class UserController extends Controller
 {
@@ -12,9 +13,10 @@ class UserController extends Controller
             return view('site.perfil.perfil');
     }
 
-    public function PerfilAtualizar(Request $request){
-        $dados = $request->all();
+    public function PerfilAtualizar(UpdateProfileFormRequest $request){
+        //dados do usuario logado.
         $usuario = auth()->user();
+        $dados = $request->all();
 
         //verificando senha, caso o User tenha modifcado.
         if ($dados['password'] != null){
