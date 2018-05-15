@@ -4,19 +4,10 @@
 @section('content')
     <h1>Meu Perfil</h1>
 
-     @if(session('success'))
-        <div class="alert alert-success">
-            {{session('success')}}
-        </div>
-     @endif
+    {{-- Alertas --}}
+    @include('admin.includes.alerts')
 
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{session('error')}}
-        </div>
-     @endif
-
-    <form action="{{route('perfil.atualizar')}}" method="post" enctype="multipart/form-data">
+     <form action="{{route('perfil.atualizar')}}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <div class="form-group">
             <label for="name">Nome: </label>
@@ -31,6 +22,11 @@
             <input class="form-control" type="password" name="password" placeholder="Senha">
         </div>
         <div class="form-group">
+            {{-- exibindo a img --}}
+            @if(auth()->user()->image != null)
+                <img src="{{ url('storage/users/'. auth()->user()->image) }}" alt="{{auth()->user()->image}}">
+            @endif
+
             <label for="image">Imagem: </label>
             <input class="form-control" type="file" name="image">
         </div>
