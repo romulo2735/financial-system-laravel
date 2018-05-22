@@ -54,11 +54,12 @@ class UserController extends Controller
         }
 
         //atualizar apenas usuario logado.
-        $att = auth()->user()->update();
+        $att = $usuario->update($dados);
 
         if ($att){
             return redirect()->route('perfil')->with('success', 'Sucesso ao Atualizar o Perfil');
         }
-        return redirect()->back()->with('error', 'Falha ao Atualizar o Perfil');
+            
+            return redirect()->back()->with('error', 'Falha ao Atualizar o Perfil');
     }
 }
