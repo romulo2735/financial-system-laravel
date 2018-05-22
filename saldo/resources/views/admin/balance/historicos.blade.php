@@ -33,7 +33,7 @@
       <table class="table table-striped">
           <thead>
               <tr>
-                  <th>#</th>
+                  <th>&</th>
                   <th>Valor</th>
                   <th>Tipo</th>
                   <th>Data</th>
