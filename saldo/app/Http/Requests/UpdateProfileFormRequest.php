@@ -26,8 +26,8 @@ class UpdateProfileFormRequest extends FormRequest
         $idUser = auth()->user()->id;
         return [
             'name'      =>  'required|string|max:100',
-            'email'     =>  "required|string|email|max:100|unique|users,email,{$idUser},id",
-            'password'  =>  'required|numeric|min:6',
+            'email'     =>  "required|string|email|max:100|unique:users,email,{$idUser},id",
+            'password'  =>  'max:20',
             'image'     =>  'image'
         ];
     }
